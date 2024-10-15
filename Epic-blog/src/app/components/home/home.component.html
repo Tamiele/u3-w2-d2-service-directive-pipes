@@ -15,13 +15,20 @@
   </div>
 </div>
 
-<button *ngFor="let tag of arrayPost" class="btn btn-info">
-  {{ tag }}
-</button>
+<div class="d-flex justify-content-center">
+  <div class="ms-2" *ngFor="let tag of uniqueTags">
+    <button type="button" class="btn btn-info" (click)="filterPostsByTag(tag)">
+      {{ tag }}
+    </button>
+  </div>
+  <button class="btn btn-secondary ms-2" (click)="clearFilter()">
+    Mostra Tutti
+  </button>
+</div>
 
 <div class="container">
   <div class="row">
-    <div *ngFor="let post of arrayPost" class="col-md-4 mt-3">
+    <div *ngFor="let post of filteredPosts" class="col-md-4 mt-3">
       <app-single-post [post]="post">
         <div class="form-container">
           <button class="btn btn-primary my-3" (click)="toggleForm()">
