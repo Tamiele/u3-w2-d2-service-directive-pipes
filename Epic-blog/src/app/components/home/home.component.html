@@ -1,0 +1,65 @@
+<h1 class="text-center my-5">Featured Post</h1>
+<div>
+  <app-single-post [post]="postInEvidenza"></app-single-post>
+</div>
+
+<h2 class="text-center my-5">Posts you might like</h2>
+<div class="container">
+  <div class="row">
+    <div
+      class="col-sm-12 mb-sm-3 col-lg-3"
+      *ngFor="let post of arrayRandomPost"
+    >
+      <app-single-post [post]="post"></app-single-post>
+    </div>
+  </div>
+</div>
+
+<button *ngFor="let tag of arrayPost" class="btn btn-info">
+  {{ tag }}
+</button>
+
+<div class="container">
+  <div class="row">
+    <div *ngFor="let post of arrayPost" class="col-md-4 mt-3">
+      <app-single-post [post]="post">
+        <div class="form-container">
+          <button class="btn btn-primary my-3" (click)="toggleForm()">
+            {{ showForm ? "Chiudi" : "Modifica" }}
+          </button>
+
+          <div *ngIf="showForm">
+            <form>
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input
+                  [(ngModel)]="post.title"
+                  type="text"
+                  id="title"
+                  class="form-control"
+                  name="title"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea
+                  [(ngModel)]="post.body"
+                  id="content"
+                  class="form-control"
+                  name="content"
+                  required
+                ></textarea>
+              </div>
+
+              <button (click)="save()" type="submit" class="btn btn-success">
+                Save
+              </button>
+            </form>
+          </div>
+        </div>
+      </app-single-post>
+    </div>
+  </div>
+</div>
